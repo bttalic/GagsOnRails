@@ -1,0 +1,24 @@
+<ul id="comments" >
+<% @comments.each do |comment| %>
+<li class="comment">
+	<span class="pull-left">
+		<%if comment.user.avatar? %>
+		<%= image_tag(comment.user.avatar.url, class:"show_follow_thumb_user") %>
+		<%else%>
+		<%= image_tag("user_default.png",class:"show_follow_thumb_user") %>
+		<%end%>
+	</br>
+		<%= link_to comment.user.name, comment.user %>
+	</span>
+	<%=comment.content%>
+	<div class="timestamp">
+		<%= time_ago_in_words(comment.created_at) %> ago.
+
+		<% if current_user?(comment.user) %>
+		<%= link_to "delete", comments_path(id:comment.id), method: :delete,
+		confirm: "You sure?" %>
+		<% end %>
+	</div>
+</li>
+<%end%>
+</ul

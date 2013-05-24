@@ -1,0 +1,68 @@
+<li >
+	<% if gag_counter%2==0 %>
+	<div class=" palette palette-night">
+		<%else%>
+		<div class=" palette palette-night-dark">
+			<% end %>
+			<% if !request.fullpath.include? '/search' %>
+			<% if gag_counter%2==0 %>
+			<asside class="pull-right gag_title palette palette-night-dark" style="width:153px"> <%= link_to gag.title, gag %>
+				<% else %>
+				<asside class="pull-right gag_title palette palette-night" style="width:153px"> <%= link_to gag.title, gag %>
+					<% end %>
+
+			<span class="timestamp">
+				<%= time_ago_in_words(gag.created_at) %> ago.
+
+				<% if current_user?(gag.user) %>
+				<%= link_to "delete", gag, method: :delete,
+				confirm: "You sure?",
+				title: gag.title %>
+				<% end %>
+			</span>
+		</br>
+		<span class="like-status">
+			<%= image_tag('megusta.png') %>
+		</span>
+		<span id="votes<%="#{gag.id}"%>" class="like-status">
+			<%= gag.votes_up %>
+		</span>
+		<span class="like-status">
+			<%= image_tag('comment.png') %>
+		</span>
+		<span class="like-status">
+			<%= gag.comments.count %>
+		</span>
+		<div>
+			<%= render :partial=>'gags/like', :locals => {:like => gag, :counter=>gag_counter} %>
+
+		</div>
+
+		<div>
+			<%= render :partial=>'gags/report', :locals => {:report => gag} %>
+		</div>
+
+		
+
+	</asside>
+	<%else %>
+		<% if gag_counter%2==0 %>
+			<div class="gag_title palette palette-night-dark" style="width:153px"> <%= link_to gag.title, gag %>
+		<% else %>
+			<div class=" gag_title palette palette-night" style="width:153px"> <%= link_to gag.title, gag %>
+		<% end %>
+		</br>
+	<%end%>
+
+		<span>
+			<% if(gag.image?) %>
+			<%= link_to image_tag(gag.image.url, :id=>"gag#{gag_counter}"), gag %>
+			<% elsif gag.imagelink? %>
+			<%= link_to image_tag(gag.imagelink, :id=>"gag#{gag_counter}"), gag %>
+			<% else %>
+			<iframe width="460" height="275" src="<%= gag.videolink %>" frameborder="0" allowfullscreen></iframe>
+			<% end %>
+		</span>
+	</div>
+
+</li>

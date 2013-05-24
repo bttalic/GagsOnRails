@@ -1,0 +1,80 @@
+<header class="navbar navbar-inverse navbar-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<%= link_to "GoR", root_path, id: "logo", class:"brand" %>
+			<nav>
+				<ul class="nav pull-left">
+					<li><%= link_to "Epic", "/epic" %></li>
+					<li><%= link_to "Rising", "/rising" %></li>
+					<li><%= link_to "Hatched", "/hatched" %></li>
+					<li>
+						<%= form_tag('/search',:class=>"navbar-form nav-search", :method=>'post') do %>
+						<%= text_field_tag(:term, nil, :placeholder =>"Search...") %>
+						<% end %>
+
+					</li>
+				</ul>
+				<ul class="nav pull-right">
+					<li><%= link_to "Home", root_path %></li>
+					<% if signed_in? %>
+					<% if current_user.admin? %>
+					<li><%= link_to "Users", users_path %></li>
+					<%end%>
+
+					<li id="fat-menu2" class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							Upload Gag <b class="caret"></b>
+						</a>
+						<%if current_user.theme==2%>
+						<ul>
+							<%else%>
+							<ul class="dropdown-menu">
+								<%end%>
+								<li><%= link_to "Upload Image", '/uploadwithimage' %></li>
+								<li><%= link_to "Add Image link", '/upload' %></li>
+								<li><%= link_to "Add Video link", '/uploadvideo' %></li>
+							</ul>
+
+
+
+							<li id="fat-menu" class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<%= current_user.name %> <b class="caret"></b>
+								</a>
+								<%if current_user.theme==2%>
+								<ul>
+									<%else%>
+									<ul class="dropdown-menu">
+										<%end%>
+										<li><%= link_to "Profile", current_user %></li>
+										<li><%= link_to "Settings", edit_user_path(current_user) %></li>
+										<li class="divider"></li>
+										<li>
+											<%= link_to "Sign out", signout_path, method: "delete" %>
+										</li>
+									</ul>
+
+
+								</li>
+								<% else %>
+								<li>
+									<%= form_for(:session, url: sessions_path, :html=>{:class=>"navbar-form pull-right"}) do |f| %>
+									<%= f.text_field :email, :value=>@email, class:"span2" %>
+									<%= f.password_field :password, :value=>@password, class:"span2" %>
+									<%= f.submit "Sign in", class: "btn btn-primary" %>
+									<% end %>
+								</li>
+								<li>
+									<%= form_tag(signup_path,  :class=>"navbar-form pull-right", :style=>"margin-left:-25px;") do %>
+									<%= text_field_tag('request', nil, :class =>"span2 hidden ", :style=>"display:none") %>
+									<%= submit_tag "Sign up", class: "btn btn-warning" %>
+									<% end %>
+									
+								</li>
+
+								<% end %>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</header>

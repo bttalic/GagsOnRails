@@ -1,0 +1,7 @@
+
+	<% if(recommend_item.avatar?) %>
+	<%= link_to image_tag(recommend_item.avatar.url, class:"show_follow_thumb_user"), recommend_item %>
+	<% else %>
+	<%= link_to image_tag("user_default.png", class:"show_follow_thumb_user"), recommend_item %>
+
+	<% end %>

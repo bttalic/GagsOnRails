@@ -1,0 +1,40 @@
+<%= provide(:title, 'Upload Gag') %>
+<h1>Add Gag</h1>
+<div class="row">
+	<div class="span6">
+		<% unless request.host.include? "heroku" %>
+		<%= form_for @gag, :html => { :multipart => true }  do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
+		<%= f.label :title %>
+		<%= f.text_field :title %>
+		<%= f.label :image %>
+		<%= f.file_field  :image %>
+	</br>
+	<%= f.submit "Upload Gag", class: "btn btn-large btn-primary" %>
+	<% end %>
+	<%else%>
+	<form accept-charset="UTF-8"  class="new_gag" method="post" disabled >
+		
+		<label for="gag_title">Title</label>
+		<input id="gag_title" name="gag[title]" size="30" type="text">
+		<label for="gag_image">Image</label>
+		<input id="gag_image" name="gag[image]" type="file">
+	</form>
+</br>
+<div class="alert alert-warning">This app is currently hosted on a free server which does not permit file upload. Use the other form to submit your Gag! </div>
+
+<%end%>
+
+</div>
+
+<asside>
+	<div class="span4 pull-right alert alert-warning">
+		<h5>Submission rules</h5>
+		<ul>
+			<li>Respect originality and creativity. Try using Google Images to find the origin of the post.</li>
+			<li>Think of an original or descriptive title, instead of phrases like "LOL", "True", or "AMAZING!"...</li>
+			<li>No blogspam. Many, many sites just recycle pics from other sites and put ads on it.</li>
+		</ul>
+	</div>
+</asside>
+</div>

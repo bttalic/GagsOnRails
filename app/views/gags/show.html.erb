@@ -1,0 +1,55 @@
+<% provide(:title, @gag.title) %>
+<div class="row">
+	<div class="span10">
+		<div class="gag-show-info">
+		<div class="palette palette-asbestos">
+			<span class="gag_title"><h1> <%= @gag.title %> </h1> <h4>By <%= link_to @gag.user.name, @gag.user %></h4></span>
+		</br>
+		<div class="btn-toolbar">
+			<span class="form-group pull-right btn-group">
+				<div>	
+					<%= render :partial=>'gags/like',  :locals => {:like => @gag, :counter=>0} %>
+				</div>
+				
+			</span>
+		</div>
+		<span class="like-status">
+			<%= image_tag('megusta.png') %>
+		</span>
+	
+		<span id="votes<%="#{@gag.id}"%>" class="like-status">
+			<%= @gag.votes_up %>
+		</span>
+		<span class="like-status">
+	<%= image_tag('comments.png') %>
+</span>
+<span class="like-status">
+	<%= @gag.comments.count %>
+</span>
+	|
+		<% if current_user?(@gag.user) %>
+		<%= link_to " delete", @gag, method: :delete,
+		confirm: "You sure?",
+		title: @gag.title %>
+		<% end %>	
+	</div>
+	</div><!--end gag-show-info-->
+
+	<div style="width:780px">
+		<% if(@gag.image?) %>
+		<%= link_to image_tag(@gag.image.url, :id=>"gag#{@gag_counter}",:class => "gag-show"), @gag.image.url %>
+		<% elsif @gag.imagelink? %>
+		<%= link_to image_tag(@gag.imagelink, :id=>"gag#{@gag_counter}",:class => "gag-show"), @gag.imagelink %>
+		<% else %>
+		<iframe height="390" src="<%= @gag.videolink %>" frameborder="0" allowfullscreen class="gag-show"></iframe>
+		<% end %>
+	</div>
+	<div class="add-comment">
+		<h4>Comments</h4>
+	<%= render 'add_comment' %>
+</div>
+<%= render 'show_comments', collection: @comments %>
+</div>
+
+</div>
+</div>

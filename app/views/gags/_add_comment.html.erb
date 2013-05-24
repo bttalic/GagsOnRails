@@ -1,0 +1,13 @@
+<% if signed_in? %>
+<%= form_for(current_user.comments.build(gag_id: @gag.id),
+	remote: true) do |f| %>
+	<%= f.hidden_field :gag_id %>
+	<%= f.text_field :content %>
+	
+	<%= f.button "Add Comment", class:"btn btn-primary pull-right" %>
+	
+<% end %>
+<%else %>
+	<input type="textarea" />
+	<a href='/ups'><%= button_tag("Add Comment", class:"btn btn-primary pull-right") %></a>
+<%end%>

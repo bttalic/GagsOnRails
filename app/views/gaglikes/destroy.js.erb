@@ -1,0 +1,2 @@
+$('#gaglikes_form'+"<%= @gag.id %>").parents('div:eq(0)').html("<%= escape_javascript(render(:partial=>'gags/like', :locals => {:like => @gag, :counter=>-1})) %>");
+$('#votes'+"<%= @gag.id %>").html("<%= @gag.votes_up %>");

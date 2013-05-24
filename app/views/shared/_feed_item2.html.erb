@@ -1,0 +1,48 @@
+<li id="<%= feed_item2.id %>">
+	
+	
+	<span class="span2 pull-right gag_title"> <%= link_to feed_item2.title, feed_item2 %>
+	</br>
+	<span class="timestamp">
+		<%= time_ago_in_words(feed_item2.created_at) %> ago.
+		By <%= link_to feed_item2.user.name, feed_item2.user %>
+		<% if current_user?(feed_item2.user.name) %>
+		<%= link_to "delete", feed_item2, method: :delete,
+		confirm: "You sure?",
+		title: feed_item2.title %>
+		<% end %>
+		
+	</span>
+</br>
+	<span class="like-status">
+<%= image_tag('megusta.png') %>
+</span>
+<span id="votes<%="#{feed_item2.id}"%>" class="like-status">
+	<%= feed_item2.votes_up %>
+</span>
+<span class="like-status">
+	<%= image_tag('comment.png') %>
+</span>
+<span class="like-status">
+	<%= feed_item2.comments.count %>
+</span>
+<div>
+<%= render :partial=>'gags/like',  :locals => {:like => feed_item2, :counter=>feed_item2_counter} %>
+</div>
+	<div>
+	<%= render :partial=>'gags/report', :locals => {:report => feed_item2} %>
+</div>
+</span>
+
+<span> 
+	<% if(feed_item2.image?) %>
+	<%= link_to image_tag(feed_item2.image.url, :id=>"gag#{feed_item2_counter}"), feed_item2 %>
+	<% elsif feed_item2.imagelink? %>
+	<%= link_to image_tag(feed_item2.imagelink, :id=>"gag#{feed_item2_counter}"), feed_item2 %>
+	<% else %>
+	<iframe width="460" height="275" src="<%= feed_item2.videolink %>" frameborder="0" allowfullscreen></iframe>
+	<% end %>
+
+</span>
+</li>
+

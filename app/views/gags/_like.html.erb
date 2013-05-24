@@ -1,0 +1,33 @@
+
+<% if signed_in? %>
+<span id="gaglikes_form<%="#{like.id}"%>" class="span2 votes form-group btn-group btn-toggle">
+	<%= form_for(current_user.gaglikes.build(liked_id: like.id, vote_sign:"1"),
+	remote: true,  :html=>{:id=>"like#{counter}"}) do |f| %>
+	<%= f.hidden_field :liked_id %>
+	<%= f.hidden_field :vote_sign %>
+	<% if current_user.liked?(like) %>
+	<%= f.button image_tag('megusta_transparent.png'),  class:"btn btn-success", :id=>"#{like.id}"+"up" %>
+	<% else %>
+	<%= f.button image_tag('megusta_transparent.png'), class:"btn btn-success not-clicked-like-dislike", :id=>"#{like.id}"+"up" %>
+	<% end %>
+	<% end %>
+	
+	<%= form_for(current_user.gaglikes.build(liked_id: like.id, vote_sign:"-1"),
+	remote: true ,  :html=>{:id=>"dislike#{counter}"}) do |f| %>
+	<%= f.hidden_field :liked_id %>
+	<%= f.hidden_field :vote_sign %>
+	<% if current_user.disliked?(like) %>
+	<%= f.button image_tag('no_transparent.png'), class:"btn btn-danger" %>
+	<% else %>
+	<%= f.button image_tag('no_transparent.png'), class:"btn btn-danger not-clicked-like-dislike", :id=>"#{like.id}"+"down" %>
+	<% end %>
+	<% end %>
+
+	<%else %>
+	<span  class="span2 votes form-group btn-group">
+		<a href='/ups'><%= button_tag image_tag('megusta_transparent.png'), class:"btn btn-success not-clicked-like-dislike", :id=>"#{like.id}"+"up" %></a>
+		<a href='/ups'><%= button_tag image_tag('no_transparent.png'), class:"btn btn-danger not-clicked-like-dislike", :id=>"#{like.id}"+"down" %></a>
+	</span>
+		<%end%>
+
+	</span>

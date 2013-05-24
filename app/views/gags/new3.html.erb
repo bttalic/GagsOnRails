@@ -1,0 +1,28 @@
+<%= provide(:title, 'Upload Gag') %>
+<h1>Add Gag</h1>
+<div class="row">
+	<div class="span6">
+		<%= form_for @gag, :html => { :multipart => true }  do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
+		<%= f.label :title %>
+		<%= f.text_field :title %>
+		<%= f.label :videolink %>
+		<%= f.text_field  :videolink %>
+	</br>
+	<%= f.submit "Upload Gag", class: "btn btn-large btn-primary" %>
+	<% end %>
+	
+
+</div>
+
+<asside>
+	<div class="span4 pull-right alert alert-warning">
+		<h5>Submission rules</h5>
+		<ul>
+			<li>Respect originality and creativity. Try using Google Images to find the origin of the post.</li>
+			<li>Think of an original or descriptive title, instead of phrases like "LOL", "True", or "AMAZING!"...</li>
+			<li>No blogspam. Many, many sites just recycle pics from other sites and put ads on it.</li>
+		</ul>
+	</div>
+</asside>
+</div>

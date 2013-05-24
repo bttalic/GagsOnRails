@@ -1,0 +1,19 @@
+<%= provide(:title, 'Hatched') %>
+<div class="row">
+	<% if @hatched.any? %>
+	<div class="span">
+		<ol class="gags">
+			<%= render @hatched %>
+		</ol>
+		<%= will_paginate @hatched %>
+	</div>
+	<% else %>
+	<div class="alert alert-warning">
+		Seems like there are no Gags for this section
+	</div>
+	<% end %>
+	<asside >
+<%= render partial: 'shared/recommends' %>
+<%= render partial: 'shared/mostliked' %>
+</asside>
+</div>

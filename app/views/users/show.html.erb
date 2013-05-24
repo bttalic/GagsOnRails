@@ -1,0 +1,67 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+	<aside class="span3">
+		<section class="palette palette-alizarin">
+			<h1>
+				<% if(@user.avatar?) %>
+				<td><%= image_tag@user.avatar.url, class:"avatar-small" %></td>
+				<% else %>
+				<td><%= image_tag("user_default.png",class:"avatar-small") %></td>
+				<% end %>
+
+				<%= @user.name %>
+			</h1>
+			<section>
+				<%= render 'shared/stats' %>
+			</section>
+			<section>
+				<%= render 'follow_form' if signed_in? %>
+			</section>
+			
+		</section>
+		<div class="btn-toolbar">
+			<div class="btn-group">
+				<button class="btn btn-inverse" id="switch_to_gags">Gags (<%= @user.gags.count %>)</button>
+				<button class="btn btn-primary" id="switch_to_microposts">Microposts (<%= @user.microposts.count %>)</button>	
+			</div>
+		</div>
+	</aside>
+
+	
+</br>
+<div id="empty">
+</div>
+<div class="active" id="gags">
+	<h1> My awesome Gags </h1>
+	<div class="span pull-right">
+		<%if @user.gags.any? %>
+		<ol class="gags">
+			<%= render @gags %>
+		</ol>
+		<%= will_paginate @gags, :params=>{"type"=>"gags"}  %>
+		<% else %>
+		<div class="alert alert-warning">
+			You don't have any gags. Upload some and share the laughs!
+		</div>
+		<% end %>
+	</div>
+</div>
+
+
+<div class="hidden" id="microposts">
+	<h1>My thoughts </h1>
+	<div class="span8 pull-right">
+		<% if @user.microposts.any? %>
+		<ol class="microposts">
+			<%= render @microposts %>
+		</ol>
+		<%= will_paginate @microposts, :params=>{"type"=>"micro"} %>
+		<% else %>
+		<div class="alert alert-warning">
+			You don't have any posts. Upload some and share your thoughts!
+		</div>
+		<% end %>
+	</div>
+</div>
+
+</div>

@@ -1,0 +1,23 @@
+<% if signed_in? %>
+
+<span id="gagreports_form<%="#{report.id}"%>" class="span2 votes form-group btn-group btn-toggle">
+<% if !current_user.reported?(report) %>
+	<%= form_for(current_user.gagreports.build(reported_id: report.id, report_type:"1")) do |f| %>
+	<%= f.hidden_field :reported_id %>
+	<%= f.hidden_field :report_type %>
+
+	<%= f.button "Report repost!",  class:"btn btn-mini btn-danger" %>
+
+	<% end %>
+
+<%= form_for(current_user.gagreports.build(reported_id: report.id, report_type:"2")) do |f| %>
+	<%= f.hidden_field :reported_id %>
+	<%= f.hidden_field :report_type %>
+	
+	<%= f.button "Report inappropriate!",  class:"btn btn-mini btn-danger" %>
+
+	<% end %>
+<%end%>
+TEEEES
+</span>
+	<%end%>

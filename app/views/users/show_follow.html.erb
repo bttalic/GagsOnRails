@@ -1,0 +1,42 @@
+<%= provide(:title, @title) %>
+<div class="row">
+	<aside class="span4">
+		<section>
+			<% if(@user.avatar?) %>
+			<td><%= image_tag(@user.avatar.url,class:"avatar") %></td>
+			<% else %>
+			<td><%= image_tag("user_default.png",class:"avatar") %></td>
+			<% end %>
+			<h1><%= @user.name %></h1>
+			<span><%= link_to "view my profile", @user %></span>
+			<span><b>Microposts:</b> <%= @user.microposts.count %></span>
+		</section>
+		<section>
+			<%= render 'shared/stats' %>
+			<% if @users.any? %>
+			<div class="user_avatars ">
+				<% @users.each do |user| %>
+				<% if(user.avatar?) %>
+				<%= link_to image_tag(user.avatar.url,class:"show_follow_thumb_user"),user %>
+				<% else %>
+				<%= link_to image_tag("user_default.png",class:"show_follow_thumb_user"),user %>
+				<% end %>
+				<% end %>
+			</div>
+			<% end %>
+		</section>
+	</aside>
+	<div class="span8">
+		<h3><%= @title %></h3>
+		<% if @users.any? %>
+		<ul class="users">
+			<%= render @users %>
+		</ul>
+		<%= will_paginate %>
+		<%else%>
+		<div class="alert alert-warning">
+				You need some friends here
+			</div>
+		<% end %>
+	</div>
+</div>

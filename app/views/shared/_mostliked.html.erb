@@ -1,0 +1,17 @@
+<% if @mostliked %>
+<%if current_user.theme==2 %>
+<div class="pull-right  palette palette-info-dark " style="margin-top:10px; width: 236px;">
+<%else %>
+<div class="pull-right  recommended_users " >
+<%end%>
+
+
+<h4>Most Liked</h4>
+
+<%= render partial: 'shared/mostliked_item', collection: @mostliked %>
+
+<%else%>
+<div class=" pull-right recommended_users" >
+<h4>Mostliked</h4>
+<%end%>
+</div>

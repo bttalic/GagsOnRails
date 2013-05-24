@@ -1,0 +1,15 @@
+<%= provide(:title, 'Epic') %>
+<div class="row">
+	<% if @epic.any? %>
+	<div class="span">
+		<ol class="gags">
+			<%= render @epic %>
+		</ol>
+		<%= will_paginate @epic %>
+	</div>
+	<% else %>
+	<div class="alert alert-warning">
+		Seems like there are no Gags for this section
+	</div>
+	<% end %>
+</div>

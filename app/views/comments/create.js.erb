@@ -1,0 +1,20 @@
+
+function addSmile(content){
+
+
+	
+	var smiles=[ ":)", ":(", ":D", ":p", ":P", ":/", ":*", ":@", ";)", ":o", ":O" , ":hrt" ];
+	var smileLinks=['smile1', 'smile2', 'smile3', 'smile4', 'smile4', 'smile5', 'smile6', 'smile7', 'smile8', 'smile9', 'smile9', 'smile10'];
+	for(var i=0; i<smiles.length; i++){
+		var image="<img src=\"/assets/"+smileLinks[i]+".png\" style='width:20px; height:20px' />";
+		var search=" "+smiles[i];
+		while (content.indexOf(search)>=0){
+			content=content.replace(search, image);
+		}
+
+	}
+	return content;
+}
+
+$('#comments').prepend("<li class=\"comment\"> <span class=\"pull-left\">  <img  class=\"show_follow_thumb_user\" src=<%if @comment.user.avatar? %> <%=@comment.user.avatar.url%> <%else%>/assets/user_default.png <%end%>  />  </br> <a href=\"/users/<%=@comment.user_id%>\"><%=@comment.user.name%></a> </span> "+addSmile("<%=@comment.content%>")+" <div class=\"timestamp\"> <%= time_ago_in_words(@comment.created_at) %> ago.  <a href=\"/comments?id=<%=@comment.id%>\" data-confirm=\"You sure?\" data-method=\"delete\" rel=\"nofollow\">delete</a> </div></li>");
+$('#comment_content').val('');

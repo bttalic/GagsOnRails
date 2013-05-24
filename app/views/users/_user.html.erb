@@ -1,0 +1,13 @@
+<li>
+	<td>
+		<% if(user.avatar?) %>
+		<%= image_tag user.avatar.url, class:"avatar" %>
+		<% else %>
+		<%= image_tag ("user_default.png"), class:"avatar" %>
+		<% end %>
+	</td>
+	<td><%= link_to user.name, user %></td>
+	<% if current_user.admin? && !current_user?(user) %>
+	| <%= link_to "delete", user, method: :delete, confirm: "You sure?" %>
+	<% end %>
+</li>

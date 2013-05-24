@@ -1,0 +1,15 @@
+<%= provide(:title, 'Rising') %>
+<div class="row">
+	<% if @rising.any? %>
+	<div class="span">
+		<ol class="gags">
+			<%= render @rising %>
+		</ol>
+		<%= will_paginate @rising %>
+	</div>
+	<% else %>
+	<div class="alert alert-warning">
+		Seems like there are no Gags for this section
+	</div>
+	<% end %>
+</div>

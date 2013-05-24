@@ -1,0 +1,2 @@
+==Welcome to gags on rails
+Read about the app on the About page of the app

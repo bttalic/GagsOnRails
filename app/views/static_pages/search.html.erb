@@ -1,0 +1,27 @@
+<div class="row">
+	<h1>You searched for: <%="#{@search}"%></h1>
+
+
+	<div id="users" class="span4">
+		<h1>Users (<%=@users.length%>)</h1>
+		<ul class="users">
+			<%= render @users %>
+		</ul>
+	</div>
+
+	<div id="microposts" class="span4 offset1">
+		<h1>Microposts (<%=@microposts.length%>)</h1>
+		<ul class="microposts">
+			<%= render @microposts %>
+		</ul>
+	</div>
+
+	<div id="gags" class="span3 offset2">
+		<h1>Gags (<%=@gags.length%>)</h1>
+		<ul class="users">
+			<%= render @gags %>
+		</ul>
+	</div>
+
+
+</div>

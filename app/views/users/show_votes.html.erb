@@ -1,0 +1,43 @@
+
+<%= provide(:title, @title) %>
+<div class="row">
+	<aside class="span3">
+		<div class="palette palette-alizarin">
+		<section>
+			<% if(@user.avatar?) %>
+			<td><%= image_tag(@user.avatar.url,class:"avatar") %></td>
+			<% else %>
+			<td><%= image_tag("user_default.png",class:"avatar") %></td>
+			<% end %>
+			<h1><%= @user.name %></h1>
+			<span><%= link_to "view my profile", @user %></span>
+			<span><b>Microposts:</b> <%= @user.microposts.count %></span>
+			<span><b>Gags:</b> <%= @user.gags.count %></span>
+</div>
+			<%= render 'shared/stats' %>
+			<% if @gags.any? %>
+			<div class="user_avatars ">
+				<% @gags.each do |gag| %>
+				<% if(gag.image?) %>
+				<%= link_to image_tag(gag.image.url,class:"show_follow_thumb_user"),gag %>
+				<% elsif (gag.imagelink?) %>
+				<%= link_to image_tag(gag.imagelink,class:"show_follow_thumb_user"),gag %>
+				<% else %>
+				<%= link_to image_tag('video.png',class:"show_follow_thumb_user"),gag %>
+				<% end %>
+				<% end %>
+			</div>
+			<% end %>
+
+		</section>
+	</aside>
+	<div class="span9">
+		<h3><%= @title %></h3>
+		<% if @gags.any? %>
+		<ul class="gags">
+			<%= render @gags %>
+		</ul>
+		<%= will_paginate @gags %>
+		<% end %>
+	</div>
+</div>

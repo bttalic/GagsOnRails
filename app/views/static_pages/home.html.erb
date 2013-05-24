@@ -1,0 +1,47 @@
+<%= provide(:title, 'Feed') %>
+<% if signed_in? %>
+<div class="row">
+	<aside class="span4">
+		<section>
+			<%= render 'shared/user_info' %>
+		
+			<%= render 'shared/stats' %>
+		</section>
+		<section>
+			<%= render 'shared/micropost_form' %>
+		</section>
+<div class="btn-group">
+		<button class="btn btn-inverse" id="switch_to_gags">Gags (<%= @user.feed2.count %>)</button>
+		<button class="btn btn-primary" id="switch_to_microposts">Microposts (<%= @user.feed.count %>)</button>	
+	</div>
+	</aside>
+
+</br>
+
+<div class="active"  id="gags">
+	<div style="margin-left:10px;" class="span pull-right palette palette-concrete">
+		<h3>Gags Feed</h3>
+		<%= render 'shared/feed2' %>
+	</div>
+</div>
+
+<div class="hidden"  id="microposts">
+	<div class="span7 pull-right palette palette-concrete">
+		<h3>Micropost Feed</h3>
+		<%= render 'shared/feed' %>
+	</div>
+</div>
+
+</div>
+<% else %>
+<div class="center hero-unit">
+	<h1>Welcome to Gags on Rails</h1>
+	<h2>
+		This is the index page for Gags on Rails. In the near future, or in a parallel universe there is a bunch of funny pictures on this page.
+		For now, see the About page for the development log and see Sign up, that works :D
+	</h2>
+	<%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+</div>
+<%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
+<%= image_tag("hc.jpg", :size=>"100x64" ) %>
+<% end %>

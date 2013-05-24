@@ -1,0 +1,22 @@
+<% if signed_in?%>
+<%if current_user.theme==2 %>
+<div class="pull-right  palette palette-info-dark " style="width: 236px;"  >
+<%else %>
+<div class="pull-right  recommended_users " >
+<%end%>
+
+<% if @recommends.count>0 %>
+<h4>Recommended Users</h4>
+
+<%= render partial: 'shared/recommend_item', collection: @recommends %>
+
+<%else%>
+
+<h4>No recommendations</h4>
+<%end%>
+</div>
+<%else%>
+<div class="pull-right  recommended_users " >
+<h4>No recommendations</h4>
+</div>
+<%end%>
