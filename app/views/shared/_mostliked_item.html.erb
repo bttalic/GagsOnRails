@@ -1,6 +1,6 @@
 
 	<% if(mostliked_item.image?) %>
-	<%= link_to image_tag(mostliked_item.image.url, class:"show_follow_thumb_user"), mostliked_item %>
+	<%= link_to image_tag(mostliked_item.image.url(:thumb), class:"show_follow_thumb_user"), mostliked_item %>
 	<% elsif mostliked_item.imagelink?  %>
 	<%= link_to image_tag(mostliked_item.imagelink, class:"show_follow_thumb_user"), mostliked_item %>
 	<%else%>

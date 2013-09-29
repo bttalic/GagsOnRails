@@ -1,7 +1,7 @@
 class Gag < ActiveRecord::Base
   attr_accessible  :title, :image, :votes_up, :imagelink, :videolink
   #:ratio, :title, :user_id, :votes, :votes_up, :image
-  has_attached_file :image, dependent: :destroy
+  has_attached_file :image, dependent: :destroy, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   validates_attachment_content_type :image, 
   :content_type => /^image\/(png|gif|jpeg)/
   belongs_to :user
